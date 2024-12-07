@@ -1,0 +1,45 @@
+{
+  "name": "@tsmetadata/json-api-orm",
+  "version": "1.0.0",
+  "description": "Object-relational mapping for JSON:API resource objects decorated with `@tsmetadata/json-api`.",
+  "author": "Ryan Huellen <me@ryanhuellen.com>",
+  "keywords": ["json", "api", "metadata", "typescript", "ts"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanhaticus/json-api-orm.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf ./lib",
+    "fix": "biome check --write .",
+    "lint": "biome lint .",
+    "verify": "biome ci . && npm run test",
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/chance": "^1.1.6",
+    "@types/flat": "^5.0.5",
+    "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.13",
+    "chance": "^1.1.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.705.0",
+    "@aws-sdk/util-dynamodb": "^3.705.0",
+    "@tsmetadata/json-api": "^2.0.3",
+    "aws-sdk": "^2.1692.0",
+    "flat": "^5.0.2",
+    "lodash": "^4.17.21"
+  }
+}
