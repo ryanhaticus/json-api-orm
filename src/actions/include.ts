@@ -11,11 +11,11 @@ export const include = async <I, C>(
 
   switch (engine) {
     case 'DYNAMODB':
-      dynamoDbInclude(classInstance, relationship, cls);
+      await dynamoDbInclude(classInstance, relationship, cls);
       break;
+    default:
+      throw new Error(
+        `No \`include\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
+      );
   }
-
-  throw new Error(
-    `No \`include\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
-  );
 };

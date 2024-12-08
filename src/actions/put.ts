@@ -6,11 +6,11 @@ export const put = async (classInstance: object) => {
 
   switch (engine) {
     case 'DYNAMODB':
-      dynamoDbPut(classInstance);
+      await dynamoDbPut(classInstance);
       break;
+    default:
+      throw new Error(
+        `No \`put\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
+      );
   }
-
-  throw new Error(
-    `No \`put\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
-  );
 };

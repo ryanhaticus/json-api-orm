@@ -7,11 +7,10 @@ export const get = async <C>(cls: new (..._: any[]) => C, id: string) => {
 
   switch (engine) {
     case 'DYNAMODB':
-      dynamoDbGet(cls, id);
-      break;
+      return dynamoDbGet(cls, id);
+    default:
+      throw new Error(
+        `No \`get\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
+      );
   }
-
-  throw new Error(
-    `No \`get\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
-  );
 };
