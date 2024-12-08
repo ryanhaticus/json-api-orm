@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "declaration": true,
+    "outDir": "./lib"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
