@@ -1,6 +1,7 @@
 import { Chance } from 'chance';
-import type { ORMConfiguration } from '../../src/types/ormConfiguration';
 import { expectORMConfiguration } from '../../src/utils/expectOrmConfiguration';
+
+import type { ORMConfiguration } from '../../src/types/ormConfiguration';
 
 describe('`expectORMConfiguration`', () => {
   let chance: Chance.Chance;
