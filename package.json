@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "Object-relational mapping for JSON:API resource objects decorated with `@tsmetadata/json-api`.",
   "author": "Ryan Huellen <me@ryanhuellen.com>",
-  "keywords": ["json", "api", "metadata", "orm", "typescript", "ts"],
+  "keywords": [
+    "json",
+    "api",
+    "metadata",
+    "orm",
+    "typescript",
+    "ts"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,6 +31,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@biomejs/cli-linux-x64": "^1.9.4",
     "@types/chance": "^1.1.6",
     "@types/flat": "^5.0.5",
     "@types/jest": "^29.5.14",
