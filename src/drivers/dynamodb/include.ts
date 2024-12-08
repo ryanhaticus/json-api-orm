@@ -1,7 +1,7 @@
 import { isResourceLinkage } from '@tsmetadata/json-api';
 import { get } from './get';
 
-export const include = async <I, C>(
+export const include = async <I extends object, C>(
   classInstance: I,
   relationshipKey: keyof I,
   // biome-ignore lint/suspicious/noExplicitAny: `any` is required to support all class constructors.
