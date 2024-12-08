@@ -1,4 +1,4 @@
-import type { ORMConfiguration } from "../types";
+import type { ORMConfiguration } from '../types';
 
 export const expectORMConfiguration = (): ORMConfiguration => {
   if (globalThis._JSONAPIORM === undefined) {
