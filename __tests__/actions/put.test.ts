@@ -21,10 +21,10 @@ describe('`put`', () => {
   it('should forward the put to the DynamoDB driver if the configured database engine is `DYNAMODB`', async () => {
     const cls = class {
       a: string = chance.string();
-    }
+    };
 
     expectORMConfigurationMocked.mockReturnValue({
-      engine: 'DYNAMODB'
+      engine: 'DYNAMODB',
     });
 
     await put(cls);
@@ -41,6 +41,6 @@ describe('`put`', () => {
 
     expect(() => put(class {})).rejects.toThrow(
       `No \`put\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
-    )
+    );
   });
 });

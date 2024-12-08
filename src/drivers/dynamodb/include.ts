@@ -3,11 +3,11 @@ import { get } from './get';
 
 export const include = async <I, C>(
   classInstance: I,
-  relationship: keyof I,
+  relationshipKey: keyof I,
   // biome-ignore lint/suspicious/noExplicitAny: `any` is required to support all class constructors.
   cls: new (..._: any[]) => C,
 ) => {
-  const resourceLinkageCandidate = classInstance[relationship];
+  const resourceLinkageCandidate = classInstance[relationshipKey];
 
   if (
     !isResourceLinkage(resourceLinkageCandidate) ||
@@ -19,11 +19,11 @@ export const include = async <I, C>(
   const resourceLinkage = resourceLinkageCandidate;
 
   if (Array.isArray(resourceLinkage)) {
-    classInstance[relationship] = [] as I[keyof I];
+    classInstance[relationshipKey] = [] as I[keyof I];
 
     for (const { id } of resourceLinkage) {
-      classInstance[relationship] = [
-        ...(classInstance[relationship] as I[keyof I][]),
+      classInstance[relationshipKey] = [
+        ...(classInstance[relationshipKey] as I[keyof I][]),
         await get(cls, id),
       ] as I[keyof I];
     }
@@ -33,5 +33,5 @@ export const include = async <I, C>(
 
   const { id } = resourceLinkage;
 
-  classInstance[relationship] = (await get(cls, id)) as I[keyof I];
+  classInstance[relationshipKey] = (await get(cls, id)) as I[keyof I];
 };

@@ -35,12 +35,16 @@ describe('`include`', () => {
 
     await include(classInstance, relationshipKey, cls);
 
-    expect(dynamoDbIncludeMocked).toHaveBeenCalledWith(classInstance, relationshipKey, cls);
+    expect(dynamoDbIncludeMocked).toHaveBeenCalledWith(
+      classInstance,
+      relationshipKey,
+      cls,
+    );
   });
 
   it('should throw an error if no driver is found for the configured engine', () => {
     const classInstance = {
-      a: 'b'
+      a: 'b',
     };
 
     const engine = chance.string();

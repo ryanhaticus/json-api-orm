@@ -1,8 +1,8 @@
-import { Chance } from "chance";
-import { get } from "../../src/actions/get";
-import { expectORMConfiguration } from "../../src/utils/expectOrmConfiguration";
+import { Chance } from 'chance';
+import { get } from '../../src/actions/get';
+import { expectORMConfiguration } from '../../src/utils/expectOrmConfiguration';
 
-import type { ORMConfiguration } from "../../src/types/ormConfiguration";
+import type { ORMConfiguration } from '../../src/types/ormConfiguration';
 
 jest.mock('../../src/utils/expectOrmConfiguration');
 const expectORMConfigurationMocked = jest.mocked(expectORMConfiguration);
@@ -21,11 +21,11 @@ describe('`get`', () => {
   it('should forward the get to the DynamoDB driver if the configured database engine is `DYNAMODB`', async () => {
     const cls = class {
       a: string = chance.string();
-    }
+    };
     const id = chance.string();
 
     expectORMConfigurationMocked.mockReturnValue({
-      engine: 'DYNAMODB'
+      engine: 'DYNAMODB',
     });
 
     const expectedResult = chance.string();
@@ -47,6 +47,6 @@ describe('`get`', () => {
 
     expect(() => get(class {}, 'blahblah')).rejects.toThrow(
       `No \`get\` driver found for database engine \`${engine}\`, please check your JSON:API ORM configuration.`,
-    )
+    );
   });
 });
