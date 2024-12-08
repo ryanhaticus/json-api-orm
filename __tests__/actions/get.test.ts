@@ -1,14 +1,14 @@
 import { Chance } from "chance";
-import { get } from "../../../src/actions/get";
-import { expectORMConfiguration } from "../../../src/utils/expectOrmConfiguration";
+import { get } from "../../src/actions/get";
+import { expectORMConfiguration } from "../../src/utils/expectOrmConfiguration";
 
-import type { ORMConfiguration } from "../../../src/types/ormConfiguration";
+import type { ORMConfiguration } from "../../src/types/ormConfiguration";
 
-jest.mock('../../../src/utils/expectOrmConfiguration');
+jest.mock('../../src/utils/expectOrmConfiguration');
 const expectORMConfigurationMocked = jest.mocked(expectORMConfiguration);
 
-import { get as dynamoDbGet } from '../../../src/drivers/dynamodb/get';
-jest.mock('../../../src/drivers/dynamodb/get');
+import { get as dynamoDbGet } from '../../src/drivers/dynamodb/get';
+jest.mock('../../src/drivers/dynamodb/get');
 const dynamoDbGetMocked = jest.mocked(dynamoDbGet);
 
 describe('`get`', () => {

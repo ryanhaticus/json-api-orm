@@ -1,14 +1,14 @@
 import Chance from 'chance';
-import { put } from '../../../src/actions/put';
-import { expectORMConfiguration } from '../../../src/utils/expectOrmConfiguration';
+import { put } from '../../src/actions/put';
+import { expectORMConfiguration } from '../../src/utils/expectOrmConfiguration';
 
-import type { ORMConfiguration } from '../../../src/types/ormConfiguration';
+import type { ORMConfiguration } from '../../src/types/ormConfiguration';
 
-jest.mock('../../../src/utils/expectOrmConfiguration');
+jest.mock('../../src/utils/expectOrmConfiguration');
 const expectORMConfigurationMocked = jest.mocked(expectORMConfiguration);
 
-import { put as dynamoDbPut } from '../../../src/drivers/dynamodb/put';
-jest.mock('../../../src/drivers/dynamodb/put');
+import { put as dynamoDbPut } from '../../src/drivers/dynamodb/put';
+jest.mock('../../src/drivers/dynamodb/put');
 const dynamoDbPutMocked = jest.mocked(dynamoDbPut);
 
 describe('`put`', () => {

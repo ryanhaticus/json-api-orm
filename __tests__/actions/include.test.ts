@@ -1,14 +1,14 @@
 import Chance from 'chance';
-import { include } from '../../../src/actions/include';
-import { expectORMConfiguration } from '../../../src/utils/expectOrmConfiguration';
+import { include } from '../../src/actions/include';
+import { expectORMConfiguration } from '../../src/utils/expectOrmConfiguration';
 
-import type { ORMConfiguration } from '../../../src/types/ormConfiguration';
+import type { ORMConfiguration } from '../../src/types/ormConfiguration';
 
-jest.mock('../../../src/utils/expectOrmConfiguration');
+jest.mock('../../src/utils/expectOrmConfiguration');
 const expectORMConfigurationMocked = jest.mocked(expectORMConfiguration);
 
-import { include as dynamoDbInclude } from '../../../src/drivers/dynamodb/include';
-jest.mock('../../../src/drivers/dynamodb/include');
+import { include as dynamoDbInclude } from '../../src/drivers/dynamodb/include';
+jest.mock('../../src/drivers/dynamodb/include');
 const dynamoDbIncludeMocked = jest.mocked(dynamoDbInclude);
 
 describe('`include`', () => {
