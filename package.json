@@ -3,14 +3,7 @@
   "version": "1.0.0",
   "description": "Object-relational mapping for JSON:API resource objects decorated with `@tsmetadata/json-api`.",
   "author": "Ryan Huellen <me@ryanhuellen.com>",
-  "keywords": [
-    "json",
-    "api",
-    "metadata",
-    "orm",
-    "typescript",
-    "ts"
-  ],
+  "keywords": ["json", "api", "metadata", "orm", "typescript", "ts"],
   "license": "MIT",
   "repository": {
     "type": "git",
