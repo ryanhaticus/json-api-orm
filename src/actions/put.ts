@@ -1,5 +1,5 @@
 import { put as dynamoDbPut } from '../drivers/dynamodb/put';
-import { expectORMConfiguration } from '../utils/expectORMConfiguration';
+import { expectORMConfiguration } from '../utils/expectOrmConfiguration';
 
 export const put = async (classInstance: object) => {
   const { engine } = expectORMConfiguration();

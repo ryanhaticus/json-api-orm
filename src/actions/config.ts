@@ -1,17 +1,14 @@
 import merge from 'lodash/merge';
+import { expectORMConfiguration } from '../utils/expectOrmConfiguration';
 
 import type { ORMConfiguration } from '../types/ormConfiguration';
 
 export const config = (
   partialConfiguration: Partial<ORMConfiguration>,
 ): ORMConfiguration => {
-  if (globalThis._JSONAPIORM === undefined) {
-    throw new Error(
-      'JSON:API ORM has been improperly configured. Please import the library from the package root.',
-    );
-  }
+  const ormConfiguration = expectORMConfiguration();
 
-  const newConfiguration = merge(globalThis._JSONAPIORM, partialConfiguration);
+  const newConfiguration = merge(ormConfiguration, partialConfiguration);
 
   globalThis._JSONAPIORM = newConfiguration;
 

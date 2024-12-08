@@ -1,5 +1,5 @@
 import { include as dynamoDbInclude } from '../drivers/dynamodb/include';
-import { expectORMConfiguration } from '../utils/expectORMConfiguration';
+import { expectORMConfiguration } from '../utils/expectOrmConfiguration';
 
 export const include = async <I, C>(
   classInstance: I,
