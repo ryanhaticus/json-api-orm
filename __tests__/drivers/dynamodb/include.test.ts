@@ -1,4 +1,4 @@
-import { isResourceLinkage } from '@tsmetadata/json-api';
+import { isRelationshipObject } from '@tsmetadata/json-api';
 import { Chance } from 'chance';
 import { get } from '../../../src/drivers/dynamodb/get';
 import { include } from '../../../src/drivers/dynamodb/include';
@@ -7,7 +7,7 @@ jest.mock('../../../src/drivers/dynamodb/get');
 const getMocked = jest.mocked(get);
 
 jest.mock('@tsmetadata/json-api');
-const isResourceLinkageMocked = jest.mocked(isResourceLinkage);
+const isRelationshipObjectMocked = jest.mocked(isRelationshipObject);
 
 describe('DynamoDB `include`', () => {
   let chance: Chance.Chance;
@@ -16,28 +16,30 @@ describe('DynamoDB `include`', () => {
     chance = new Chance();
   });
 
-  describe('when the `resourceLinkageCandidate` is an array of resource identifier objects', () => {
+  describe('when the `relationshipObjectCandidate` data is an array of resource identifier objects', () => {
     it('should get the resources from the DynamoDB table and include them in the relationship', async () => {
       const relationshipKey = chance.string();
 
       const classInstance = {
-        [relationshipKey]: [
-          {
-            id: chance.string(),
-            type: chance.string(),
-          },
-          {
-            id: chance.string(),
-            type: chance.string(),
-          },
-        ],
+        [relationshipKey]: {
+          data: [
+            {
+              id: chance.string(),
+              type: chance.string(),
+            },
+            {
+              id: chance.string(),
+              type: chance.string(),
+            },
+          ],
+        },
       };
 
       const cls = class {
         a: string = chance.string();
       };
 
-      isResourceLinkageMocked.mockReturnValue(true);
+      isRelationshipObjectMocked.mockReturnValue(true);
 
       const resources = [
         {
@@ -67,26 +69,28 @@ describe('DynamoDB `include`', () => {
       expect(getMocked).toHaveBeenNthCalledWith(
         1,
         cls,
-        classInstance[relationshipKey][0].id,
+        classInstance[relationshipKey].data[0].id,
       );
       expect(getMocked).toHaveBeenNthCalledWith(
         2,
         cls,
-        classInstance[relationshipKey][1].id,
+        classInstance[relationshipKey].data[1].id,
       );
 
       expect(resultantClassInstance[relationshipKey]).toEqual(resources);
     });
   });
 
-  describe('when the `resourceLinkageCandidate` is a resource identifier object', () => {
+  describe('when the `relationshipObjectCandidate` data is a resource identifier object', () => {
     it('should get the resource from the DynamoDB table and include it in the relationship', async () => {
       const relationshipKey = chance.string();
 
       const classInstance = {
         [relationshipKey]: {
-          id: chance.string(),
-          type: chance.string(),
+          data: {
+            id: chance.string(),
+            type: chance.string(),
+          },
         },
       };
 
@@ -94,7 +98,7 @@ describe('DynamoDB `include`', () => {
         a: string = chance.string();
       };
 
-      isResourceLinkageMocked.mockReturnValue(true);
+      isRelationshipObjectMocked.mockReturnValue(true);
 
       const resource = {
         id: chance.string(),
@@ -113,14 +117,14 @@ describe('DynamoDB `include`', () => {
       expect(getMocked).toHaveBeenCalledTimes(1);
       expect(getMocked).toHaveBeenCalledWith(
         cls,
-        classInstance[relationshipKey].id,
+        classInstance[relationshipKey].data.id,
       );
 
       expect(resultantClassInstance[relationshipKey]).toEqual(resource);
     });
   });
 
-  describe('when the `resourceLinkageCandidate` is not a resource linkage', () => {
+  describe('when the `relationshipObjectCandidate` is not a relationship object', () => {
     it('should not include the relationship (no-op)', async () => {
       const relationshipKey = chance.string();
 
@@ -132,7 +136,7 @@ describe('DynamoDB `include`', () => {
         a: string = chance.string();
       };
 
-      isResourceLinkageMocked.mockReturnValue(false);
+      isRelationshipObjectMocked.mockReturnValue(false);
 
       const resultantClassInstance = { ...classInstance };
 
@@ -142,19 +146,21 @@ describe('DynamoDB `include`', () => {
     });
   });
 
-  describe('when the `resourceLinkageCandidate` is `null`', () => {
+  describe('when the `relationshipObjectCandidate` data is `null`', () => {
     it('should not include the relationship (no-op)', async () => {
       const relationshipKey = chance.string();
 
       const classInstance = {
-        [relationshipKey]: null,
+        [relationshipKey]: {
+          data: null,
+        },
       };
 
       const cls = class {
         a: string = chance.string();
       };
 
-      isResourceLinkageMocked.mockReturnValue(true);
+      isRelationshipObjectMocked.mockReturnValue(true);
 
       const resultantClassInstance = { ...classInstance };
 
