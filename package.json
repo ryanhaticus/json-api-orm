@@ -44,6 +44,6 @@
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@tsmetadata/json-api": "^2.0.5"
+    "@tsmetadata/json-api": "^2.0.3"
   }
 }

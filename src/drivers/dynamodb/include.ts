@@ -1,4 +1,4 @@
-import { isRelationshipObject } from '@tsmetadata/json-api';
+import { isResourceLinkage } from '@tsmetadata/json-api';
 import { get } from './get';
 
 export const include = async <I extends object, C>(
@@ -7,18 +7,21 @@ export const include = async <I extends object, C>(
   // biome-ignore lint/suspicious/noExplicitAny: `any` is required to support all class constructors.
   cls: new (..._: any[]) => C,
 ) => {
-  const relationshipObjectCandidate = classInstance[relationshipKey];
+  const resourceLinkageCandidate = classInstance[relationshipKey];
 
-  if (!isRelationshipObject(relationshipObjectCandidate)) {
+  if (
+    !isResourceLinkage(resourceLinkageCandidate) ||
+    resourceLinkageCandidate === null
+  ) {
     return;
   }
 
-  const { data } = relationshipObjectCandidate;
+  const resourceLinkage = resourceLinkageCandidate;
 
-  if (Array.isArray(data)) {
+  if (Array.isArray(resourceLinkage)) {
     classInstance[relationshipKey] = [] as I[keyof I];
 
-    for (const { id } of data) {
+    for (const { id } of resourceLinkage) {
       classInstance[relationshipKey] = [
         ...(classInstance[relationshipKey] as I[keyof I][]),
         await get(cls, id),
@@ -28,11 +31,7 @@ export const include = async <I extends object, C>(
     return;
   }
 
-  if (data === null) {
-    return;
-  }
-
-  const { id } = data;
+  const { id } = resourceLinkage;
 
   classInstance[relationshipKey] = (await get(cls, id)) as I[keyof I];
 };
